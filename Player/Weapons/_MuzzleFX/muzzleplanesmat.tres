@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dp8q3xkome5qr"]
+
+[ext_resource type="Texture2D" uid="uid://b3oyx0gqdtbet" path="res://Player/Weapons/_MuzzleFX/MuzzleFlash01.png" id="1_csjfi"]
+
+[resource]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1, 0.988235, 0.552941, 1)
+albedo_texture = ExtResource("1_csjfi")

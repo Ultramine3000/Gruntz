@@ -16,6 +16,10 @@ class_name WeaponBase
 @export var muzzle_flash: Node3D
 @export var tracer_scene: PackedScene
 
+@export_group("ADS")
+@export var ads_position: Vector3 = Vector3.ZERO   # set this per-weapon in the inspector
+@export var ads_speed: float = 10.0
+
 @export_group("Nodes")
 @export var anim_player: AnimationPlayer
 
@@ -35,6 +39,9 @@ var state: WeaponState = WeaponState.IDLE
 var current_ammo: int = 0
 var can_fire: bool = true
 var fire_timer: float = 0.0
+var is_ads: bool = false
+
+var _hip_position: Vector3 = Vector3.ZERO
 
 # ─────────────────────────────────────────────
 #  ANIMATION NAMES
@@ -52,6 +59,7 @@ const ANIM_INSPECT  := "inspect"
 const INPUT_FIRE    := "fire"
 const INPUT_RELOAD  := "reload"
 const INPUT_INSPECT := "inspect"
+const INPUT_ADS     := "ads"
 
 # ─────────────────────────────────────────────
 #  SIGNALS
@@ -67,6 +75,7 @@ signal draw_finished
 # ─────────────────────────────────────────────
 func _ready() -> void:
 	current_ammo = mag_size
+	_hip_position = position  # snapshot wherever the weapon sits in the editor
 
 	if anim_player:
 		anim_player.animation_finished.connect(_on_animation_finished)
@@ -80,6 +89,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_handle_fire_cooldown(delta)
 	_handle_input()
+	_update_ads(delta)
+
+
+# ─────────────────────────────────────────────
+#  ADS
+# ─────────────────────────────────────────────
+func _update_ads(delta: float) -> void:
+	var target_pos := ads_position if is_ads else _hip_position
+	position = position.lerp(target_pos, ads_speed * delta)
 
 
 # ─────────────────────────────────────────────
@@ -88,6 +106,8 @@ func _process(delta: float) -> void:
 func _handle_input() -> void:
 	if state in [WeaponState.DRAWING, WeaponState.HOLSTERING]:
 		return
+
+	is_ads = Input.is_action_pressed(INPUT_ADS)
 
 	if Input.is_action_pressed(INPUT_FIRE):
 		try_fire()

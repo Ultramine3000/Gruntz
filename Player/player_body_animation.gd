@@ -1,6 +1,9 @@
 extends Node
 class_name PlayerAnimation
 
+# Run this to clean glb player model.
+# Unused upper and lower tracks wil lstill be 'keyed' on import of GLB so this cleaner get rid of them.
+
 @export var skeleton: Skeleton3D
 
 @onready var anim_player: AnimationPlayer = $"../3rdperson_player_model/AnimationPlayer"

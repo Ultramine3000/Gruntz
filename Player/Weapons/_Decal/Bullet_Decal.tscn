@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh8ofp62k4lvh"]
+
+[ext_resource type="Texture2D" uid="uid://dg0tqiu2iv0wq" path="res://Player/Weapons/_Decal/Bullet_Decal.png" id="1_afkvx"]
+[ext_resource type="Script" uid="uid://csmgwkoq8iect" path="res://Player/Weapons/_Decal/bullet_decal.gd" id="2_afkvx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7xsn"]
+transparency = 1
+albedo_texture = ExtResource("1_afkvx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_afkvx"]
+material = SubResource("StandardMaterial3D_r7xsn")
+size = Vector2(0.05, 0.05)
+
+[node name="Bullet_Decal" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_afkvx")
+script = ExtResource("2_afkvx")

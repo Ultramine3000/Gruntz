@@ -18,15 +18,14 @@ func init(from: Vector3, to: Vector3) -> void:
 func _process(delta: float) -> void:
 	if _done:
 		return
-
 	_alive += delta
 	if _alive >= max_lifetime:
 		queue_free()
 		return
-
 	var dir := target - global_position
-	if dir.length() < 0.1:
+	var dist := dir.length()
+	if dist < 0.1:
 		queue_free()
 		return
-
-	global_position += dir.normalized() * speed * delta
+	var step := speed * delta
+	global_position += dir.normalized() * min(step, dist)

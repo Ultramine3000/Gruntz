@@ -4,7 +4,7 @@ class_name WeaponBase
 # ─────────────────────────────────────────────
 #  WEAPON IDENTITY
 # ─────────────────────────────────────────────
-@export_enum("Pistol", "Rifle") var weapon_type: int = 0
+@export_enum("Pistol", "Rifle") var weapon_type: String = "Pistol"
 
 @export_group("Stats")
 @export var weapon_name: String = "Unnamed Weapon"
@@ -15,9 +15,10 @@ class_name WeaponBase
 @export var reload_time: float = 2.0
 @export var muzzle_flash: Node3D
 @export var tracer_scene: PackedScene
+@export var decal_scene: PackedScene
 
 @export_group("ADS")
-@export var ads_position: Vector3 = Vector3.ZERO   # set this per-weapon in the inspector
+@export var ads_position: Vector3 = Vector3.ZERO
 @export var ads_speed: float = 10.0
 
 @export_group("Nodes")
@@ -75,7 +76,7 @@ signal draw_finished
 # ─────────────────────────────────────────────
 func _ready() -> void:
 	current_ammo = mag_size
-	_hip_position = position  # snapshot wherever the weapon sits in the editor
+	_hip_position = position
 
 	if anim_player:
 		anim_player.animation_finished.connect(_on_animation_finished)
@@ -154,10 +155,24 @@ func _on_fire() -> void:
 
 	if tracer_scene and muzzle_flash:
 		var from := muzzle_flash.global_position
-		var to := aim_point
 		var tracer = tracer_scene.instantiate()
 		get_tree().current_scene.add_child(tracer)
-		tracer.init(from, to)
+		tracer.init(from, aim_point)
+
+	if decal_scene and player:
+		var ray: RayCast3D = player.aim_ray
+		print("ray colliding: ", ray.is_colliding())
+		print("hit point: ", ray.get_collision_point())
+		if ray.is_colliding():
+			var hit_point: Vector3 = ray.get_collision_point()
+			var normal: Vector3 = ray.get_collision_normal()
+			var decal := decal_scene.instantiate() as MeshInstance3D
+			get_tree().current_scene.add_child(decal)
+			decal.global_position = hit_point + normal * 0.02
+			var up: Vector3 = Vector3.UP if abs(normal.dot(Vector3.UP)) < 0.99 else Vector3.FORWARD
+			var right: Vector3 = up.cross(normal).normalized()
+			var up_corrected: Vector3 = normal.cross(right).normalized()
+			decal.global_transform.basis = Basis(right, up_corrected, normal)
 
 
 func _handle_fire_cooldown(delta: float) -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=46 format=4 uid="uid://3ushnkbyqqt4"]
 
-[ext_resource type="Script" uid="uid://chxm7701h12y5" path="res://Player/player_movement.gd" id="1_3qydi"]
+[ext_resource type="Script" uid="uid://chxm7701h12y5" path="res://Player/player_base.gd" id="1_3qydi"]
 [ext_resource type="PackedScene" uid="uid://c5ggr6lcmadoa" path="res://Player/Weapons/AKS74/AKS74.tscn" id="2_ddoul"]
 [ext_resource type="PackedScene" uid="uid://c77i3ivuqybvf" path="res://Player/HUD/HUD.tscn" id="3_tok1r"]
 [ext_resource type="Script" uid="uid://j85dohyb20ke" path="res://Player/player_body_animation.gd" id="4_ddoul"]
@@ -6304,7 +6304,7 @@ _data = {
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("skeleton")]
 script = ExtResource("1_3qydi")
 accel = 12.16
-decel = 37.73
+decel = 20.0
 sway_amount = 0.007
 sway_speed = 5.0
 lean_roll = 20.0
@@ -6326,6 +6326,7 @@ fov = 56.4
 
 [node name="AKS74" parent="Camera3D" instance=ExtResource("2_ddoul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, -0.049, 0.125)
+weapon_type = "Pistol"
 ads_position = Vector3(-0.158, -0.024, 0.205)
 
 [node name="AimRay" type="RayCast3D" parent="Camera3D"]
@@ -6904,7 +6905,7 @@ bones/79/rotation = Quaternion(-7.21775e-09, -1.44704e-07, 1.1528e-07, 1)
 bones/79/scale = Vector3(1, 1, 1)
 
 [node name="AKS74" type="BoneAttachment3D" parent="3rdperson_player_model/Armature/Skeleton3D"]
-transform = Transform3D(11.0882, 15.086, 1.47061, 9.17092, -8.12792, 14.2313, 12.0683, -7.68427, -12.1658, -22.0996, 42.6921, -149.082)
+transform = Transform3D(11.088207, 15.085921, 1.4705728, 9.170887, -8.127896, 14.231242, 12.068237, -7.684288, -12.165741, -22.099686, 42.692097, -149.08162)
 bone_name = "AKS74"
 bone_idx = 66
 
@@ -6914,7 +6915,7 @@ mesh = SubResource("ArrayMesh_gp1os")
 skeleton = NodePath("")
 
 [node name="TarusJudge" type="BoneAttachment3D" parent="3rdperson_player_model/Armature/Skeleton3D"]
-transform = Transform3D(5.92073, 8.90154, 0.960913, 5.24785, -4.3837, 8.274, 7.25402, -4.09409, -6.77004, -25.5096, 42.7413, -148.182)
+transform = Transform3D(5.9207616, 8.901567, 0.9608928, 5.2478743, -4.3837104, 8.274034, 7.254036, -4.0941234, -6.770063, -25.509686, 42.7413, -148.18156)
 bone_name = "TarusJudge"
 bone_idx = 67
 

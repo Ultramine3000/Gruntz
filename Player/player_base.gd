@@ -19,6 +19,12 @@ extends CharacterBody3D
 @export var lean_speed: float = 10.0
 ## WEAPON ##
 @export var aim_range: float = 500.0
+## CROUCH ##
+@export var crouch_camera_offset: float = -0.435
+@export var crouch_speed: float = 10.0
+## HUD ##
+@export var crosshair: CanvasItem
+@export var crosshair_fade_speed: float = 10.0
 ## SKELETON ##
 @export var skeleton: Skeleton3D
 
@@ -33,6 +39,7 @@ var _pitch_delta: float = 0.0
 var _sway_targets: Array[Node3D] = []
 var _lean_target: float = 0.0
 var _spine_bone_idx: int = -1
+var _standing_camera_y: float = 0.0
 
 func _ready() -> void:
 	add_to_group("player")
@@ -41,6 +48,7 @@ func _ready() -> void:
 	aim_ray.enabled = true
 	aim_ray.target_position = Vector3(0, 0, -aim_range)
 	aim_ray.collision_mask = 0xFFFFFFFF
+	_standing_camera_y = camera.position.y
 	for child in camera.get_children():
 		if child is Node3D and child != aim_ray:
 			_sway_targets.append(child)
@@ -61,9 +69,22 @@ func _unhandled_input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(delta: float) -> void:
+	_update_look()
 	_update_sway(delta)
 	_update_lean(delta)
+	_update_crouch(delta)
+	_update_crosshair(delta)
 	_mouse_delta = Vector2.ZERO
+
+func _update_look() -> void:
+	rotate_y(_yaw_delta)
+	camera.rotation.x = clamp(
+		camera.rotation.x + _pitch_delta,
+		deg_to_rad(pitch_min),
+		deg_to_rad(pitch_max)
+	)
+	_yaw_delta = 0.0
+	_pitch_delta = 0.0
 
 func _update_sway(delta: float) -> void:
 	var target_rot := Vector3(
@@ -90,15 +111,19 @@ func _update_lean(delta: float) -> void:
 		var current := skeleton.get_bone_pose_rotation(_spine_bone_idx)
 		skeleton.set_bone_pose_rotation(_spine_bone_idx, current.slerp(target_rot, lean_speed * delta))
 
+func _update_crouch(delta: float) -> void:
+	var target_y := _standing_camera_y
+	if Input.is_action_pressed("crouch"):
+		target_y += crouch_camera_offset
+	camera.position.y = lerp(camera.position.y, target_y, crouch_speed * delta)
+
+func _update_crosshair(delta: float) -> void:
+	if not crosshair:
+		return
+	var target_alpha := 0.0 if Input.is_action_pressed("ads") else 1.0
+	crosshair.modulate.a = lerp(crosshair.modulate.a, target_alpha, crosshair_fade_speed * delta)
+
 func _physics_process(delta: float) -> void:
-	rotate_y(_yaw_delta)
-	camera.rotation.x = clamp(
-		camera.rotation.x + _pitch_delta,
-		deg_to_rad(pitch_min),
-		deg_to_rad(pitch_max)
-	)
-	_yaw_delta = 0.0
-	_pitch_delta = 0.0
 	_movement_process(delta)
 
 func _movement_process(delta: float) -> void:

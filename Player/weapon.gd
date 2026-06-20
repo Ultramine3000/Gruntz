@@ -21,8 +21,25 @@ class_name WeaponBase
 @export var ads_position: Vector3 = Vector3.ZERO
 @export var ads_speed: float = 10.0
 
+@export_group("Recoil")
+@export var recoil_amount: float = 1.5          # base degrees of upward kick per shot
+@export var recoil_horizontal_variance: float = 0.3
+@export var recoil_recovery_speed: float = 8.0   # how fast it settles back per second
+@export var recoil_growth: float = 1.15          # multiplier applied per consecutive shot
+@export var recoil_max_multiplier: float = 4.0   # caps how steep the climb can get
+@export var recoil_reset_delay: float = 0.35     # seconds of not firing before the streak resets
+
+@export_subgroup("Visual Kick")
+@export var visual_kick_amount: float = 3.0      # degrees the weapon model itself kicks up
+@export var visual_kick_recovery_speed: float = 14.0  # snappier than the aim recovery
+
 @export_group("Nodes")
 @export var anim_player: AnimationPlayer
+
+# ─────────────────────────────────────────────
+#  RENDER LAYERS
+# ─────────────────────────────────────────────
+const FIRST_PERSON_LAYER := 1 << 1   # layer 2
 
 # ─────────────────────────────────────────────
 #  STATE
@@ -43,6 +60,16 @@ var fire_timer: float = 0.0
 var is_ads: bool = false
 
 var _hip_position: Vector3 = Vector3.ZERO
+var _hip_rotation: Vector3 = Vector3.ZERO
+var _visual_kick: float = 0.0
+
+# ─────────────────────────────────────────────
+#  RECOIL STATE
+# ─────────────────────────────────────────────
+var aim_ray: RayCast3D
+var _recoil_offset: Vector2 = Vector2.ZERO        # x = yaw, y = pitch
+var _consecutive_shots: int = 0
+var _time_since_last_shot: float = 0.0
 
 # ─────────────────────────────────────────────
 #  ANIMATION NAMES
@@ -66,6 +93,7 @@ const INPUT_ADS     := "ads"
 #  SIGNALS
 # ─────────────────────────────────────────────
 signal weapon_fired(weapon: WeaponBase)
+signal reload_started(weapon: WeaponBase)
 signal weapon_reloaded(weapon: WeaponBase)
 signal ammo_changed(current: int, reserve: int)
 signal holster_finished
@@ -77,6 +105,11 @@ signal draw_finished
 func _ready() -> void:
 	current_ammo = mag_size
 	_hip_position = position
+	_hip_rotation = rotation_degrees
+
+	aim_ray = _find_sibling_raycast()
+	if not aim_ray:
+		push_warning("[%s] No sibling RayCast3D named 'AimRay' found." % weapon_name)
 
 	if anim_player:
 		anim_player.animation_finished.connect(_on_animation_finished)
@@ -91,6 +124,22 @@ func _process(delta: float) -> void:
 	_handle_fire_cooldown(delta)
 	_handle_input()
 	_update_ads(delta)
+	_recover_recoil(delta)
+	_recover_visual_kick(delta)
+	_update_recoil_streak(delta)
+
+
+# ─────────────────────────────────────────────
+#  SIBLING LOOKUP
+# ─────────────────────────────────────────────
+func _find_sibling_raycast() -> RayCast3D:
+	var parent := get_parent()
+	if not parent:
+		return null
+	for sibling in parent.get_children():
+		if sibling is RayCast3D and sibling.name == "AimRay":
+			return sibling
+	return null
 
 
 # ─────────────────────────────────────────────
@@ -141,6 +190,63 @@ func try_fire() -> void:
 	emit_signal("weapon_fired", self)
 	emit_signal("ammo_changed", current_ammo, reserve_ammo)
 	_on_fire()
+	_apply_recoil()
+
+
+func _apply_recoil() -> void:
+	# Scale this shot's kick by how long the current streak has run.
+	var multiplier: float = min(pow(recoil_growth, _consecutive_shots), recoil_max_multiplier)
+	var kick_pitch := recoil_amount * multiplier
+	var kick_yaw := randf_range(-recoil_horizontal_variance, recoil_horizontal_variance) * multiplier
+
+	_recoil_offset.y += kick_pitch
+	_recoil_offset.x += kick_yaw
+
+	if aim_ray:
+		aim_ray.rotation_degrees.x += kick_pitch
+		aim_ray.rotation_degrees.y += kick_yaw
+
+	_visual_kick += visual_kick_amount * multiplier
+	rotation_degrees.x = _hip_rotation.x + _visual_kick
+
+	_consecutive_shots += 1
+	_time_since_last_shot = 0.0
+
+
+func _update_recoil_streak(delta: float) -> void:
+	if _consecutive_shots == 0:
+		return
+	_time_since_last_shot += delta
+	if _time_since_last_shot >= recoil_reset_delay:
+		_consecutive_shots = 0
+
+
+func _recover_recoil(delta: float) -> void:
+	if _recoil_offset == Vector2.ZERO or not aim_ray:
+		return
+
+	var recovered := _recoil_offset.lerp(Vector2.ZERO, recoil_recovery_speed * delta)
+	var delta_offset := recovered - _recoil_offset
+
+	aim_ray.rotation_degrees.x += delta_offset.y
+	aim_ray.rotation_degrees.y += delta_offset.x
+
+	_recoil_offset = recovered
+
+	if _recoil_offset.length() < 0.01:
+		_recoil_offset = Vector2.ZERO
+
+
+func _recover_visual_kick(delta: float) -> void:
+	if _visual_kick == 0.0:
+		return
+
+	_visual_kick = lerp(_visual_kick, 0.0, visual_kick_recovery_speed * delta)
+	rotation_degrees.x = _hip_rotation.x + _visual_kick
+
+	if abs(_visual_kick) < 0.01:
+		_visual_kick = 0.0
+		rotation_degrees.x = _hip_rotation.x
 
 
 func _on_fire() -> void:
@@ -157,12 +263,11 @@ func _on_fire() -> void:
 		var from := muzzle_flash.global_position
 		var tracer = tracer_scene.instantiate()
 		get_tree().current_scene.add_child(tracer)
+		_set_layer_recursive(tracer, FIRST_PERSON_LAYER)
 		tracer.init(from, aim_point)
 
 	if decal_scene and player:
 		var ray: RayCast3D = player.aim_ray
-		print("ray colliding: ", ray.is_colliding())
-		print("hit point: ", ray.get_collision_point())
 		if ray.is_colliding():
 			var hit_point: Vector3 = ray.get_collision_point()
 			var normal: Vector3 = ray.get_collision_normal()
@@ -173,6 +278,14 @@ func _on_fire() -> void:
 			var right: Vector3 = up.cross(normal).normalized()
 			var up_corrected: Vector3 = normal.cross(right).normalized()
 			decal.global_transform.basis = Basis(right, up_corrected, normal)
+			_set_layer_recursive(decal, FIRST_PERSON_LAYER)
+
+
+func _set_layer_recursive(node: Node, layer: int) -> void:
+	if node is VisualInstance3D:
+		node.layers = layer
+	for child in node.get_children():
+		_set_layer_recursive(child, layer)
 
 
 func _handle_fire_cooldown(delta: float) -> void:
@@ -197,6 +310,7 @@ func try_reload() -> void:
 		return
 
 	state = WeaponState.RELOADING
+	emit_signal("reload_started", self)
 	play_anim(ANIM_RELOAD)
 
 

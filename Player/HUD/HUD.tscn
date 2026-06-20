@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c77i3ivuqybvf"]
+[gd_scene load_steps=4 format=3 uid="uid://c77i3ivuqybvf"]
 
 [ext_resource type="Texture2D" uid="uid://glgwl2o83004" path="res://Player/HUD/Cross-Hair.png" id="1_a1gsu"]
+[ext_resource type="Script" uid="uid://cnhtwd2y6rlct" path="res://Player/HUD/ammo__counter.gd" id="2_6lrxr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6lrxr"]
+font_size = 18
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -11,20 +15,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.501
-anchor_bottom = 0.502
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 40.848
-offset_bottom = 40.704
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Cross-hair" type="Sprite2D" parent="Control"]
-position = Vector2(1, 0)
-scale = Vector2(0.1, 0.1)
+[node name="Crosshair" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(578, 326)
+scale = Vector2(0.12, 0.12)
 texture = ExtResource("1_a1gsu")
+
+[node name="AmmoCounter" type="Label" parent="."]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 609.0
+offset_right = 52.0
+offset_bottom = 643.0
+label_settings = SubResource("LabelSettings_6lrxr")
+horizontal_alignment = 2
+script = ExtResource("2_6lrxr")

@@ -17,16 +17,16 @@ mouse_filter = 2
 
 [node name="Crosshair" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(578, 326)
+position = Vector2(800, 450)
 scale = Vector2(0.12, 0.12)
 texture = ExtResource("1_a1gsu")
 
 [node name="AmmoCounter" type="Label" parent="."]
 layout_mode = 0
 offset_left = 12.0
-offset_top = 609.0
+offset_top = 850.0
 offset_right = 52.0
-offset_bottom = 643.0
+offset_bottom = 884.0
 label_settings = SubResource("LabelSettings_6lrxr")
 horizontal_alignment = 2
 script = ExtResource("2_6lrxr")

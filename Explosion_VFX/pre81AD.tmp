@@ -1,0 +1,143 @@
+[gd_scene load_steps=10 format=3 uid="uid://6pcia2lyj3we"]
+
+[ext_resource type="Texture2D" uid="uid://c6mvnycnt4wax" path="res://misc/textures/1K_tiling_17_normal.png" id="1_36t4m"]
+[ext_resource type="Texture2D" uid="uid://dgptdu8p2bg27" path="res://misc/textures/T_checker21.jpg" id="1_co6w6"]
+[ext_resource type="PackedScene" uid="uid://cria7ch0o77qj" path="res://misc/characters/manequim_red_anim_1.tscn" id="19_6t57l"]
+
+[sub_resource type="GDScript" id="GDScript_bvcii"]
+resource_name = "preload_presentation"
+script/source = "extends Node
+
+const VFX_DATA : Array[String] = [
+	\"res://VFX/Scenes/VFX_Explosion_A.tscn\",
+	\"res://VFX/Scenes/VFX_Explosion_B.tscn\",
+	\"res://VFX/Scenes/VFX_Explosion_C.tscn\",
+	\"res://VFX/Scenes/VFX_mini_explosion_1.tscn\",
+	\"res://VFX/Scenes/VFX_mini_explosion_2.tscn\",
+	\"res://VFX/Scenes/VFX_mini_explosion_soil_1.tscn\"
+]
+
+
+var vfx_res : Array[Resource] 
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(\"ui_down\"):
+		pass
+		
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	for n in 9:
+		vfx_res[n] = preload(VFX_DATA[n]);
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_y7rnt"]
+sky_top_color = Color(0.266575, 0.266575, 0.266575, 1)
+sky_horizon_color = Color(0.654232, 0.654232, 0.654232, 1)
+ground_bottom_color = Color(0.314316, 0.314316, 0.314316, 1)
+ground_horizon_color = Color(0.381703, 0.381703, 0.381703, 1)
+
+[sub_resource type="Sky" id="Sky_jx0kq"]
+sky_material = SubResource("ProceduralSkyMaterial_y7rnt")
+
+[sub_resource type="Environment" id="Environment_4f8yv"]
+background_mode = 2
+sky = SubResource("Sky_jx0kq")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.234518, 0.257582, 0.29384, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6n4x"]
+albedo_color = Color(0.6237, 0.71064, 0.81, 1)
+albedo_texture = ExtResource("1_co6w6")
+normal_enabled = true
+normal_texture = ExtResource("1_36t4m")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f8ahm"]
+size = Vector2(500, 500)
+
+[node name="map1" type="Node"]
+script = SubResource("GDScript_bvcii")
+
+[node name="map_stuff" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="map_stuff"]
+environment = SubResource("Environment_4f8yv")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="map_stuff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.13779, 0.404203, -2.58724)
+visible = false
+
+[node name="floor" type="MeshInstance3D" parent="map_stuff"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0304239, 0)
+material_override = SubResource("StandardMaterial3D_e6n4x")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_f8ahm")
+skeleton = NodePath("../..")
+
+[node name="manequim_red_anim1" parent="map_stuff" instance=ExtResource("19_6t57l")]
+transform = Transform3D(0.949655, 0, -0.313296, 0, 1, 0, 0.313296, 0, 0.949655, 5.66916, 0, 0.424328)
+
+[node name="Skeleton3D" parent="map_stuff/manequim_red_anim1" index="0"]
+bones/1/position = Vector3(0.00420282, 0.0145554, 0.935948)
+bones/1/rotation = Quaternion(-0.409166, -0.567826, -0.253569, 0.667727)
+bones/2/rotation = Quaternion(-0.0223754, -0.032767, -0.0456987, 0.998167)
+bones/3/rotation = Quaternion(0.0215531, -0.00375871, -0.115403, 0.993078)
+bones/4/rotation = Quaternion(0.0243203, 0.0279481, -0.0239464, 0.999027)
+bones/5/rotation = Quaternion(0.220106, 0.698916, 0.119018, 0.670004)
+bones/6/rotation = Quaternion(0.0760959, 0.56597, -0.173371, 0.80239)
+bones/7/rotation = Quaternion(0.0164833, 0.0273107, -0.247519, 0.968358)
+bones/8/rotation = Quaternion(-0.524337, 0.0677453, -0.140655, 0.837077)
+bones/9/rotation = Quaternion(0.1347, 0.0258998, 0.298396, 0.944534)
+bones/10/rotation = Quaternion(0.0201256, 0.0531319, 0.355768, 0.932846)
+bones/12/rotation = Quaternion(0.0062624, -0.0782057, 0.423977, 0.902268)
+bones/13/rotation = Quaternion(-0.0094862, 0.0504392, 0.422917, 0.904714)
+bones/15/rotation = Quaternion(-0.183556, -0.158335, 0.499366, 0.831788)
+bones/16/rotation = Quaternion(0.0211857, -0.00688945, 0.512152, 0.858606)
+bones/18/rotation = Quaternion(-0.145543, -0.114568, 0.51199, 0.838784)
+bones/19/rotation = Quaternion(0.00591491, 0.00253267, 0.288812, 0.957364)
+bones/21/rotation = Quaternion(0.7123, 0.356422, 0.167208, 0.581062)
+bones/22/rotation = Quaternion(0.015063, 0.0492641, 0.0489947, 0.99747)
+bones/24/rotation = Quaternion(0.109625, -3.15842e-09, -2.86376e-08, 0.993973)
+bones/25/rotation = Quaternion(0.0967121, -6.11913e-08, -1.344e-08, 0.995312)
+bones/26/rotation = Quaternion(0.72202, -0.165411, -0.667534, 0.0756596)
+bones/27/rotation = Quaternion(-0.0203674, 0.541274, -0.0370542, 0.839782)
+bones/28/rotation = Quaternion(-0.0484083, 0.010371, -0.0625296, 0.996814)
+bones/29/rotation = Quaternion(-0.539073, -0.175566, 0.0515606, 0.822143)
+bones/47/rotation = Quaternion(0.0093074, 5.99556e-08, 3.74241e-08, 0.999957)
+bones/48/rotation = Quaternion(0.337885, 0.0173234, -0.246611, 0.908139)
+bones/49/rotation = Quaternion(0.0022819, 0.103763, 0.065596, 0.992434)
+bones/50/rotation = Quaternion(0.492878, -0.253461, -0.0767552, 0.828817)
+bones/51/rotation = Quaternion(-0.0469521, 0.0135019, -0.109499, 0.992786)
+bones/52/rotation = Quaternion(-0.00367226, -0.00188394, -0.00762506, 0.999962)
+bones/53/rotation = Quaternion(-0.0438398, 0.119491, 0.00337358, 0.991861)
+bones/54/rotation = Quaternion(8.02216e-05, 2.71054e-05, -0.699017, 0.715106)
+bones/55/rotation = Quaternion(-0.500827, 0.000244597, -0.00042641, 0.865547)
+bones/56/rotation = Quaternion(0.163407, 0.14575, 0.97005, 0.105157)
+bones/57/rotation = Quaternion(-0.0474788, 0.0149723, -0.0974731, 0.993992)
+bones/58/rotation = Quaternion(0.0319752, -0.00215496, -0.0075529, 0.999458)
+bones/59/rotation = Quaternion(0.0230024, 0.128532, 0.0496393, 0.990195)
+bones/61/rotation = Quaternion(-0.127165, 6.10381e-05, -0.000487814, 0.991882)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="map_stuff"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 11.4902, 0)
+light_energy = 11.211
+shadow_enabled = true
+spot_range = 79.614
+spot_angle = 60.21
+spot_angle_attenuation = 1.56917
+
+[node name="Camera3D" type="Camera3D" parent="map_stuff"]
+transform = Transform3D(0.923314, -0.0790419, 0.375825, -0.0322314, 0.95919, 0.280918, -0.382692, -0.271489, 0.883086, 3.38769, 4.06597, 8.57331)
+fov = 66.0
+
+[editable path="map_stuff/manequim_red_anim1"]

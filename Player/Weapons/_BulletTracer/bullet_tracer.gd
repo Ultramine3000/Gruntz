@@ -8,7 +8,6 @@ var target: Vector3 = Vector3.ZERO
 var _alive: float = 0.0
 var _done: bool = false
 
-
 func init(from: Vector3, to: Vector3) -> void:
 	global_position = from
 	target = to

@@ -27,6 +27,8 @@ extends CharacterBody3D
 @export var crosshair_fade_speed: float = 10.0
 ## SKELETON ##
 @export var skeleton: Skeleton3D
+## INTRO LOCK ##
+@export var intro_animation_name: StringName = "intro"
 
 @onready var camera: Camera3D = $Camera3D
 var aim_ray: RayCast3D
@@ -40,6 +42,7 @@ var _sway_targets: Array[Node3D] = []
 var _lean_target: float = 0.0
 var _spine_bone_idx: int = -1
 var _standing_camera_y: float = 0.0
+var _input_locked: bool = false
 
 func _ready() -> void:
 	add_to_group("player")
@@ -56,6 +59,43 @@ func _ready() -> void:
 		_spine_bone_idx = skeleton.find_bone("mixamorig_Spine")
 		if _spine_bone_idx == -1:
 			push_warning("PlayerController: could not find bone 'mixamorig_Spine'")
+
+	_check_for_intro_cutscene()
+
+func _check_for_intro_cutscene() -> void:
+	var anim_players := _find_all_animation_players(get_tree().root)
+	for ap in anim_players:
+		if ap.is_playing() and ap.current_animation == intro_animation_name:
+			_lock_for_intro(ap)
+			return
+
+func _find_all_animation_players(node: Node) -> Array[AnimationPlayer]:
+	var result: Array[AnimationPlayer] = []
+	if node is AnimationPlayer:
+		result.append(node)
+	for child in node.get_children():
+		result.append_array(_find_all_animation_players(child))
+	return result
+
+func _lock_for_intro(ap: AnimationPlayer) -> void:
+	_input_locked = true
+	set_physics_process(false)
+	set_process(false)
+	set_process_unhandled_input(false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	ap.animation_finished.connect(_on_intro_finished, CONNECT_ONE_SHOT)
+
+func _on_intro_finished(anim_name: StringName) -> void:
+	if anim_name != intro_animation_name:
+		return
+	_input_locked = false
+	set_physics_process(true)
+	set_process(true)
+	set_process_unhandled_input(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	_mouse_delta = Vector2.ZERO
+	_yaw_delta = 0.0
+	_pitch_delta = 0.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

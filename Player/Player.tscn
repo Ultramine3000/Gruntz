@@ -1,7 +1,6 @@
-[gd_scene load_steps=63 format=4 uid="uid://3ushnkbyqqt4"]
+[gd_scene load_steps=62 format=4 uid="uid://3ushnkbyqqt4"]
 
 [ext_resource type="Script" uid="uid://chxm7701h12y5" path="res://Player/player_base.gd" id="1_3qydi"]
-[ext_resource type="PackedScene" uid="uid://bri4hid7givjv" path="res://Player/Weapons/MAC10/MAC10.tscn" id="2_8g4oa"]
 [ext_resource type="PackedScene" uid="uid://c77i3ivuqybvf" path="res://Player/HUD/HUD.tscn" id="3_tok1r"]
 [ext_resource type="Script" uid="uid://j85dohyb20ke" path="res://Player/Player_Model/player_body_animation.gd" id="4_ddoul"]
 [ext_resource type="PackedScene" uid="uid://cc2b16xcn66b4" path="res://Player/Weapons/_MuzzleFX/Muzzle_Flash.tscn" id="5_8g4oa"]
@@ -9555,8 +9554,6 @@ fov = 56.4
 
 [node name="AimRay" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -200)
-
-[node name="MAC10" parent="Camera3D" instance=ExtResource("2_8g4oa")]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.51162165)

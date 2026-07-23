@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nu3ngcbgts8g"
+uid="uid://uw1vc4yffptx"
 path.s3tc="res://.godot/imported/starting_zone_2_shipping_1.png-bc7a1fce908ae6a84c4eb2488ae0c8df.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "268d95d4a60f5660d7e8d4cd933fcac3"
 }
 
 [deps]

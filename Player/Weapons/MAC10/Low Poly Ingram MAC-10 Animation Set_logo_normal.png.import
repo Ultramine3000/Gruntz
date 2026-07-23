@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj5qyy83yw0jj"
-path.s3tc="res://.godot/imported/starting_zone_2_rock.png-311fa25b6f8a833d210d4766ec41a539.s3tc.ctex"
+uid="uid://bl5dk5qdr6jkm"
+path.s3tc="res://.godot/imported/Low Poly Ingram MAC-10 Animation Set_logo_normal.png-16368f3d600152ad0eba7d24b058f1a3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "20709ec0a4421519628d1379e63ea8cf"
+"md5": "4d019cb3176826298d2d7be5f85ce319"
 }
 
 [deps]
 
-source_file="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_rock.png"
-dest_files=["res://.godot/imported/starting_zone_2_rock.png-311fa25b6f8a833d210d4766ec41a539.s3tc.ctex"]
+source_file="res://Player/Weapons/MAC10/Low Poly Ingram MAC-10 Animation Set_logo_normal.png"
+dest_files=["res://.godot/imported/Low Poly Ingram MAC-10 Animation Set_logo_normal.png-16368f3d600152ad0eba7d24b058f1a3.s3tc.ctex"]
 
 [params]
 
@@ -25,12 +25,12 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://Player/Weapons/MAC10/Low Poly Ingram MAC-10 Animation Set_logo_normal.png"
 process/channel_remap/red=0
 process/channel_remap/green=1
 process/channel_remap/blue=2

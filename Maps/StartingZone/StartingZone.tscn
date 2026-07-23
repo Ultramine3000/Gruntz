@@ -1,4 +1,4 @@
-[gd_scene load_steps=601 format=4 uid="uid://cl4tja8fkyb23"]
+[gd_scene load_steps=606 format=4 uid="uid://cl4tja8fkyb23"]
 
 [ext_resource type="Script" uid="uid://bx0b5lmvn3xtq" path="res://Maps/StartingZone/Objects/Intro Camera/intro_camera.gd" id="1_4815u"]
 [ext_resource type="Texture2D" uid="uid://0pjxotdg2feh" path="res://Maps/StartingZone/Objects/Radio/RadioAnimation_Radio.png" id="1_vt8uv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://csckmgbdklals" path="res://Maps/StartingZone/StartingZoneAreaTextures/entry_ground.png" id="2_76mb5"]
 [ext_resource type="Texture2D" uid="uid://cpxanhfa7h7af" path="res://Maps/StartingZone/Objects/Radio/RadioAnimation_Radio_Emission.png" id="2_4815u"]
 [ext_resource type="Texture2D" uid="uid://qv83etl0b4dv" path="res://Maps/StartingZone/StartingZoneAreaTextures/entry_treeline.png" id="3_77exp"]
+[ext_resource type="AudioStream" uid="uid://c0i1bbnliicfv" path="res://Maps/StartingZone/Objects/Intro Camera/Kombinat Intro Cinematic.mp3" id="4_2phal"]
 [ext_resource type="Texture2D" uid="uid://0l20c18ss5jq" path="res://Maps/StartingZone/StartingZoneAreaTextures/entry_steptodown.png" id="4_681bo"]
 [ext_resource type="Texture2D" uid="uid://bpkiaqb0e56sc" path="res://Maps/StartingZone/StartingZoneAreaTextures/entry_b_1.png" id="5_uhojv"]
 [ext_resource type="Texture2D" uid="uid://0jwjjoxuwmy6" path="res://Maps/StartingZone/StartingZoneAreaTextures/entry_b_2.png" id="6_amyku"]
@@ -13,50 +14,52 @@
 [ext_resource type="Script" uid="uid://cjfqkm2lvcill" path="res://Maps/StartingZone/obj_hover.gd" id="8_b0kjd"]
 [ext_resource type="Shader" uid="uid://dormfe4ylvo5k" path="res://Maps/StartingZone/sky.gdshader" id="9_enl86"]
 [ext_resource type="Shader" uid="uid://ds0w0y1tfp1tm" path="res://Maps/StartingZone/storm.gdshader" id="10_mqta5"]
-[ext_resource type="Texture2D" uid="uid://c3mmm43lgdhxg" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_b_1.png" id="11_805i1"]
-[ext_resource type="Texture2D" uid="uid://d3q11m8f7jwbj" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_treeline.png" id="12_10geo"]
-[ext_resource type="Texture2D" uid="uid://b8lxqlxuls6ag" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_steptodown.png" id="13_4vpmn"]
-[ext_resource type="Texture2D" uid="uid://bl8bx11bp5rpm" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_charcoal_pit.png" id="14_ea5ox"]
-[ext_resource type="Texture2D" uid="uid://40uo6wosegee" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_charcoal_pit_e.png" id="15_alng0"]
-[ext_resource type="Texture2D" uid="uid://cqsk1yd17ldvf" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_wood.png" id="16_a0pov"]
-[ext_resource type="Texture2D" uid="uid://blctu1ho0chlt" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_rock.png" id="17_7xp6j"]
-[ext_resource type="Texture2D" uid="uid://cdca3bjakcwbf" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_boxes.png" id="18_noxor"]
-[ext_resource type="Texture2D" uid="uid://br42yftgtl06o" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_b_2.png" id="20_s76fy"]
-[ext_resource type="Texture2D" uid="uid://nu3ngcbgts8g" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_shipping_1.png" id="21_yfk7c"]
-[ext_resource type="Texture2D" uid="uid://dleqo4y4isljr" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_UV_tree_in2.png" id="22_0nvfh"]
-[ext_resource type="Texture2D" uid="uid://bp7kbasi40v6y" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_8520b544-875f-465c-9fb9-3ab27e23605a.png" id="23_u0jl3"]
+[ext_resource type="Texture2D" uid="uid://v1xug0on0ljx" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_b_1.png" id="11_805i1"]
+[ext_resource type="Texture2D" uid="uid://dq23y7b8ju3lv" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_treeline.png" id="12_10geo"]
+[ext_resource type="Texture2D" uid="uid://dmlfeuixhkxjo" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_steptodown.png" id="13_4vpmn"]
+[ext_resource type="Texture2D" uid="uid://dws0voqnbadeb" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_charcoal_pit.png" id="14_ea5ox"]
+[ext_resource type="Texture2D" uid="uid://bvvnotk4qdy7i" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_charcoal_pit_e.png" id="15_alng0"]
+[ext_resource type="Texture2D" uid="uid://btqxla5rji6kr" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_wood.png" id="16_a0pov"]
+[ext_resource type="Texture2D" uid="uid://dj5qyy83yw0jj" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_rock.png" id="17_7xp6j"]
+[ext_resource type="Texture2D" uid="uid://vl20ljdsronj" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_boxes.png" id="18_noxor"]
+[ext_resource type="Texture2D" uid="uid://bg2aoer1wpiiq" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_b_2.png" id="20_s76fy"]
+[ext_resource type="Texture2D" uid="uid://uw1vc4yffptx" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_shipping_1.png" id="21_yfk7c"]
+[ext_resource type="Texture2D" uid="uid://enhcsgvcfy6a" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_UV_tree_in2.png" id="22_0nvfh"]
+[ext_resource type="Texture2D" uid="uid://dytmkyxpnfeiv" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_2_8520b544-875f-465c-9fb9-3ab27e23605a.png" id="23_u0jl3"]
 [ext_resource type="Shader" uid="uid://dulkiccbeomux" path="res://Maps/StartingZone/electricity_gdshader.gdshader" id="23_yecnu"]
-[ext_resource type="Texture2D" uid="uid://cmry6g3q5pkr6" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_b_1.png" id="24_kb0si"]
+[ext_resource type="Texture2D" uid="uid://dkraimg20aosk" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_b_1.png" id="24_kb0si"]
 [ext_resource type="Texture2D" uid="uid://br2ukjj747130" path="res://Maps/StartingZone/NPCs/Trader/Trader_guitar.png" id="24_prov1"]
-[ext_resource type="Texture2D" uid="uid://k15e4ova73xk" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_treeline.png" id="25_ag7lt"]
-[ext_resource type="Texture2D" uid="uid://di3ugo2d14m35" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_steptodown.png" id="26_0sm4d"]
-[ext_resource type="Texture2D" uid="uid://dpjpk3l7h2mpf" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_charcoal_pit.png" id="27_p1wft"]
-[ext_resource type="Texture2D" uid="uid://d15ik26toogx5" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_charcoal_pit_e.png" id="28_cprfj"]
-[ext_resource type="Texture2D" uid="uid://ckkqqs4tmv70t" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_wood.png" id="29_tlr8j"]
-[ext_resource type="Texture2D" uid="uid://pcopf24wvdsk" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_rock.png" id="30_nbqk5"]
-[ext_resource type="Texture2D" uid="uid://dvat5y40ec7l2" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_boxes.png" id="31_01u8u"]
+[ext_resource type="Texture2D" uid="uid://cuw0i8cphyoi2" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_treeline.png" id="25_ag7lt"]
+[ext_resource type="Texture2D" uid="uid://5jviec4jcnhs" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_steptodown.png" id="26_0sm4d"]
+[ext_resource type="Texture2D" uid="uid://cjo20qx0pu83q" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_charcoal_pit.png" id="27_p1wft"]
+[ext_resource type="Texture2D" uid="uid://cnqem4gtvythv" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_charcoal_pit_e.png" id="28_cprfj"]
+[ext_resource type="Texture2D" uid="uid://dsuuh80e13x8e" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_wood.png" id="29_tlr8j"]
+[ext_resource type="Texture2D" uid="uid://q6snv24la4x6" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_rock.png" id="30_nbqk5"]
+[ext_resource type="Texture2D" uid="uid://cmbj7gtkduqp2" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_boxes.png" id="31_01u8u"]
 [ext_resource type="Texture2D" uid="uid://d0svrr32488fm" path="res://Maps/StartingZone/StartingZoneAreaTextures/village4_grass_4.png" id="32_kb0si"]
-[ext_resource type="Texture2D" uid="uid://bw74oscqcseux" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_b_2.png" id="33_emppa"]
-[ext_resource type="Texture2D" uid="uid://ucv5txpy4vum" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_shipping_1.png" id="34_vt8uv"]
-[ext_resource type="Texture2D" uid="uid://bu2q0odal7qr1" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_UV_tree_in2.png" id="35_4815u"]
-[ext_resource type="Texture2D" uid="uid://dxneod4krjxws" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_8520b544-875f-465c-9fb9-3ab27e23605a.png" id="36_cjhnv"]
-[ext_resource type="Texture2D" uid="uid://dx1q8kb7eifca" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_ground.png" id="37_jks10"]
-[ext_resource type="Texture2D" uid="uid://bw3fh5a2cvedh" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_railroad_stone.png" id="38_8xylk"]
-[ext_resource type="Texture2D" uid="uid://cpdpoocyr60ew" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_traincar.png" id="39_ahd6g"]
-[ext_resource type="Texture2D" uid="uid://bxs2ap7u2351l" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_toxic_barrel.png" id="40_lwecr"]
-[ext_resource type="Texture2D" uid="uid://co1fj65nc8u46" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_tent&bag.png" id="41_dwb8j"]
-[ext_resource type="Texture2D" uid="uid://cxf3lxl5p46gt" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_soda.png" id="42_fld50"]
+[ext_resource type="Texture2D" uid="uid://flbwsh12q3wv" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_b_2.png" id="33_emppa"]
+[ext_resource type="Texture2D" uid="uid://dn01h167a5js" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_shipping_1.png" id="34_vt8uv"]
+[ext_resource type="Texture2D" uid="uid://ccl50504ki13m" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_UV_tree_in2.png" id="35_4815u"]
+[ext_resource type="Texture2D" uid="uid://bhcvk7dawucv6" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_8520b544-875f-465c-9fb9-3ab27e23605a.png" id="36_cjhnv"]
+[ext_resource type="Texture2D" uid="uid://dvsxjsr3q2ul8" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_ground.png" id="37_jks10"]
+[ext_resource type="Texture2D" uid="uid://ckt67d6rq0cx0" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_railroad_stone.png" id="38_8xylk"]
+[ext_resource type="Texture2D" uid="uid://b5koinmblv68p" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_traincar.png" id="39_ahd6g"]
+[ext_resource type="Texture2D" uid="uid://b0bl8onhtxm4s" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_toxic_barrel.png" id="40_lwecr"]
+[ext_resource type="Texture2D" uid="uid://cb8uqepr42fml" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_tent&bag.png" id="41_dwb8j"]
+[ext_resource type="Texture2D" uid="uid://ccsrutewqd6c6" path="res://Maps/StartingZone/StartingZoneAreaTextures/starting_zone_3_soda.png" id="42_fld50"]
 [ext_resource type="PackedScene" uid="uid://d2j2nawxivb5w" path="res://Maps/StartingZone/starting_zone_4.glb" id="43_ag7lt"]
 [ext_resource type="Script" uid="uid://bp3sbw61l5yac" path="res://Maps/StartingZone/NPCs/Trader/trader_headlook.gd" id="45_cprfj"]
 [ext_resource type="PackedScene" uid="uid://dc2xnra76xixa" path="res://Maps/StartingZone/Objects/GlowSticks/glow_stick.glb" id="46_p1wft"]
 [ext_resource type="PackedScene" uid="uid://ci0hvtpsa8g5e" path="res://Maps/StartingZone/Objects/Chopper/Chopper.glb" id="48_nbqk5"]
 [ext_resource type="Script" uid="uid://cq6q7p05hf1gg" path="res://Maps/StartingZone/Objects/Chopper/heli_crash.gd" id="49_01u8u"]
 [ext_resource type="Script" uid="uid://co7pqcy6ctavs" path="res://Maps/StartingZone/Objects/Chopper/propeller.gd" id="50_01u8u"]
+[ext_resource type="AudioStream" uid="uid://cxoqcmof1j8uc" path="res://Maps/StartingZone/NPCs/Trader/moscow_nights.mp3" id="50_j3ige"]
 [ext_resource type="Texture2D" uid="uid://tt78hrfn3tv6" path="res://Maps/StartingZone/Objects/Rubble/Rubble_b_1.png" id="54_4815u"]
 [ext_resource type="Texture2D" uid="uid://bw0tiil763opq" path="res://Maps/StartingZone/Objects/Title/kombinat.png" id="54_cjhnv"]
 [ext_resource type="Shader" uid="uid://p24ugvveu6du" path="res://Maps/StartingZone/Objects/Title/title.gdshader" id="54_jks10"]
 [ext_resource type="Texture2D" uid="uid://cixjr1mrqvafh" path="res://Smoke_VFX/Textures/T_VFX_simple_1R.png" id="57_lwecr"]
 [ext_resource type="Texture2D" uid="uid://du4o44wboryvw" path="res://Smoke_VFX/Textures/T_Noise_001R.png" id="58_dwb8j"]
+[ext_resource type="Shader" uid="uid://dyx8nmrw1ipo5" path="res://Maps/StartingZone/Objects/BunkerEntrance/voidshader.gdshader" id="60_mag2r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8lkbm"]
 sky_top_color = Color(0.14927575, 0.18683401, 0.23686486, 1)
@@ -9599,13 +9602,32 @@ alpha_curve = SubResource("CurveTexture_pa67x")
 [sub_resource type="QuadMesh" id="QuadMesh_onbb8"]
 size = Vector2(0.15, 0.15)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_btm8p"]
+render_priority = 0
+shader = ExtResource("60_mag2r")
+shader_parameter/color_rock_a = Color(0.052483827, 0.04035233, 0.033633854, 1)
+shader_parameter/color_rock_b = Color(0.05, 0.04, 0.04, 1)
+shader_parameter/color_glow = Color(1, 0.35, 0.05, 1)
+shader_parameter/color_glow_hot = Color(1, 0.9, 0.4, 1)
+shader_parameter/cell_scale = 2.1610000551475
+shader_parameter/crack_width = 0.0
+shader_parameter/crack_pulse_speed = 1.0
+shader_parameter/heat_shimmer = 0.05000000074506
+shader_parameter/glow_flicker_speed = 0.0
+shader_parameter/parallax_depth = 0.08
+shader_parameter/parallax_steps = 14
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mag2r"]
+material = SubResource("ShaderMaterial_btm8p")
+size = Vector2(1.46, 2.065)
+
 [node name="TestScene" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vm1gi")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("anim_player", "player", "flash_mesh")]
-transform = Transform3D(0.62816507, -0.118536524, -0.7689977, -0.054555014, 0.97918504, -0.19549963, 0.77616495, 0.16475874, 0.6086232, -12.533565, 6.0130157, 75.65783)
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("anim_player", "player", "flash_mesh", "flash_sound")]
+transform = Transform3D(0.62816495, -0.11853652, -0.7689977, -0.054555003, 0.9791849, -0.19549963, 0.7761649, 0.1647587, 0.6086232, -12.533565, 6.0130157, 75.65783)
 cull_mask = 1048573
 fov = 56.4
 script = ExtResource("1_4815u")
@@ -9616,6 +9638,7 @@ fade_in_time = 4.5
 disappear_time = 8.75
 fade_out_time = 1.5
 flash_mesh = NodePath("../Title")
+flash_sound = NodePath("AudioStreamPlayer3D")
 
 [node name="RadioAnimation" type="Node3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011619568, -0.06609869, 0.037776947)
@@ -10181,6 +10204,9 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0.000619931
 light_energy = 0.09
 omni_range = 11.454
 omni_attenuation = 1.19
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Camera3D"]
+stream = ExtResource("4_2phal")
 
 [node name="Player" parent="." instance=ExtResource("1_yecnu")]
 transform = Transform3D(0.27604005, 0, -0.9611465, 0, 1, 0, 0.9611465, 0, 0.27604005, -10.826, 4.777847, 75.611)
@@ -14749,7 +14775,7 @@ mesh = SubResource("ArrayMesh_015o7")
 skeleton = NodePath("")
 
 [node name="Plane_004" type="MeshInstance3D" parent="starting_zone_3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09737605, 3.231336, -120.54043)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09737605, 3.231336, -120.54042)
 mesh = SubResource("ArrayMesh_rf8gq")
 skeleton = NodePath("")
 
@@ -15380,6 +15406,12 @@ libraries = {
 }
 autoplay = "guitar"
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Trader"]
+transform = Transform3D(2.352941, 0, 0, 0, 2.3529408, 0, 0, 0, 2.352941, 0.1802826, 0, 0.3553543)
+stream = ExtResource("50_j3ige")
+autoplay = true
+max_distance = 45.0
+
 [node name="glow_stick" parent="." instance=ExtResource("46_p1wft")]
 transform = Transform3D(0.605, 0, 0, 0, 0.605, 0, 0, 0, 0.605, -12.006775, 4.9714923, 71.1227)
 
@@ -15473,5 +15505,9 @@ amount = 12
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_j3n8r")
 draw_pass_1 = SubResource("QuadMesh_onbb8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.77482325, 0.6321778, -0.00017648935, 2.9802322e-08, -0.00027923187, -0.9999999, -0.6321778, 0.77482325, -0.00021636486, 6.042484, 3.3137841, 47.428333)
+mesh = SubResource("PlaneMesh_mag2r")
 
 [editable path="Chopper"]

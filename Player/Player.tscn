@@ -1,8 +1,9 @@
-[gd_scene load_steps=62 format=4 uid="uid://3ushnkbyqqt4"]
+[gd_scene load_steps=63 format=4 uid="uid://3ushnkbyqqt4"]
 
 [ext_resource type="Script" uid="uid://chxm7701h12y5" path="res://Player/player_base.gd" id="1_3qydi"]
 [ext_resource type="PackedScene" uid="uid://c77i3ivuqybvf" path="res://Player/HUD/HUD.tscn" id="3_tok1r"]
 [ext_resource type="Script" uid="uid://j85dohyb20ke" path="res://Player/Player_Model/player_body_animation.gd" id="4_ddoul"]
+[ext_resource type="AudioStream" uid="uid://co2qbef5vemub" path="res://Maps/StartingZone/dragon-studio-creepy-industrial-sounds-ambience-482892.mp3" id="5_6ysni"]
 [ext_resource type="PackedScene" uid="uid://cc2b16xcn66b4" path="res://Player/Weapons/_MuzzleFX/Muzzle_Flash.tscn" id="5_8g4oa"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tok1r"]
@@ -10194,5 +10195,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_i0g1w")
 }
 playback_default_blend_time = 0.4
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_6ysni")
+volume_db = -26.28
+max_db = -0.043
+autoplay = true
 
 [editable path="HUD"]

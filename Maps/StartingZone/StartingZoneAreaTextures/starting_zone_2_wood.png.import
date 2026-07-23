@@ -2,11 +2,14 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqsk1yd17ldvf"
+uid="uid://btqxla5rji6kr"
 path.s3tc="res://.godot/imported/starting_zone_2_wood.png-90d6e30279fb9f1cc734f70ae86f2820.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
+}
+generator_parameters={
+"md5": "ee1223fecd301be7dd603ea1598e7b8f"
 }
 
 [deps]
